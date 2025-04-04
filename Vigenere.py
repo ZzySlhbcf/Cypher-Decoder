@@ -66,11 +66,11 @@ class transform:
 
     def Coincidence_Index_Calculate(self, sentence) -> float:
         letter_dict = self.Get_Letter_NUM(sentence)
-        CoincidenceIndex = 0
+        coincidenceIndex = 0
         sentence_length = len(sentence)
         for i in letter_dict:
-            CoincidenceIndex += letter_dict[i]*(letter_dict[i]-1)/(sentence_length*(sentence_length-1))
-        return CoincidenceIndex
+            coincidenceIndex += letter_dict[i]*(letter_dict[i]-1)/(sentence_length*(sentence_length-1))
+        return coincidenceIndex
 
     def Get_IC_List(self, max_num: int) -> dict:
         res = {}
