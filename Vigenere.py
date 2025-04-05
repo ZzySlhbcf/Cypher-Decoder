@@ -2,7 +2,7 @@ dic_sample = {" ": " | ", "A": "_", "B": "_", "C": "_", "D": "_", "E": "_", "F":
               "N": "_", "O": "_", "P": "_", "Q": "_", "R": "_", "S": "_", "T": "_", "U": "_", "V": "_", "W": "_", "X": "_", "Y": "_", "Z": "_"}
 
 
-class transform:
+class Vigenere_Transformer:
     def __init__(self, cypher):
         self.cypher = self.Sentence_Checker(cypher)
         self.letters = "abcdefghijklmnopqrstuvwxyz"
@@ -17,16 +17,7 @@ class transform:
             sentence = sentence.replace(" ", "")
         return sentence
 
-    def Monoalphabetic_Guess(self, dic_temp):
-        cypher = self.cypher
-        print(cypher.replace(" ", " | "))
-        for i in dic_temp:
-            self.letters = self.letters.replace(dic_temp[i], "")
-            cypher = cypher.replace(i, dic_temp[i])
-        print(cypher)
-        print(self.letters)
-
-    def Polyalphabetic_Translation(self, input_sentence: str, key: str = "") -> str:
+    def Decoder(self, input_sentence: str, key: str = "") -> str:
         if key != "":
             key = list(key.upper())
             for i in range(len(key)):
@@ -66,11 +57,11 @@ class transform:
 
     def Coincidence_Index_Calculate(self, sentence) -> float:
         letter_dict = self.Get_Letter_NUM(sentence)
-        coincidenceIndex = 0
+        CoincidenceIndex = 0
         sentence_length = len(sentence)
         for i in letter_dict:
-            coincidenceIndex += letter_dict[i]*(letter_dict[i]-1)/(sentence_length*(sentence_length-1))
-        return coincidenceIndex
+            CoincidenceIndex += letter_dict[i]*(letter_dict[i]-1)/(sentence_length*(sentence_length-1))
+        return CoincidenceIndex
 
     def Get_IC_List(self, max_num: int) -> dict:
         res = {}
@@ -126,6 +117,6 @@ class transform:
 if __name__ == "__main__":
     sentence = "LAFLUIWOYWPADUFHSNBVSWVNDZQDUFRBPLUYQPLWLPHZRLUEDUBSYMIPRDIJHTYQUCUZYLKFRSKHZBUHULUEKPQFOYLYSSAMWOCWHZOLGDTDDPPOFDDTGOPYUDGWOYOSDRYKVVDVLAULRZYGWPLJZYQKYPTWVLJIAFHHSWOMUVDDAPLMJLUEPVLRNPDWFXWMQAFHZSEQCFAGQDFLJFLHLDSWCLMQLFXUBULBDUBVPVWFQHWYUHRHJGSOCUZZXAGFVLILQVAFDARKPQLZCQAGULJBUCZAMPL"
     # sentence = "DVCMUAXZKPSAL"
-    cypher = transform(sentence)
-    translation = cypher.Polyalphabetic_Translation(cypher.cypher)
-    print(translation)
+    cypher = Vigenere_Transformer(sentence)
+    decoder = cypher.Decoder(cypher.cypher)
+    print(decoder)
